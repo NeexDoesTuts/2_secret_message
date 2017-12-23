@@ -24,11 +24,13 @@ class Affine(Cipher):
         """Encrypts a string (text) message"""
 
         encrypted_list = []
+        text = text.lower()
 
         for letter in text:
             try: # characters in alphabet are encrypted 
-                letter_index = self.alphabet.index(letter)
-                encrypted_list.append(self.alphabet[self.cipher_list[letter_index]])
+                letter_idx = self.alphabet.index(letter)
+                encrypted_l = self.alphabet[self.cipher_list[letter_idx]]
+                encrypted_list.append(encrypted_l)
             except ValueError: 
                 # characters outside of range (of alphabet) stay the same
                 encrypted_list.append(letter)
@@ -36,4 +38,17 @@ class Affine(Cipher):
         return "".join(encrypted_list)
 
     def decrypt(self, text):
-        pass
+        """Decrypts a string (text) message"""
+        
+        decrypted_list = []
+        text = text.lower()
+        
+        for letter in text:
+            try:
+                letter_idx = self.alphabet.index(letter)
+                decrypted_l = self.alphabet[self.cipher_list.index(letter_idx)]
+                decrypted_list.append(decrypted_l)
+            except ValueError:
+                decrypted_list.append(letter)
+        
+        return "".join(decrypted_list)
