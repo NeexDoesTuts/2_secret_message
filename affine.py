@@ -1,6 +1,3 @@
-import string
-import random
-ds
 from ciphers import Cipher
 
 
@@ -16,13 +13,27 @@ class Affine(Cipher):
 
         self.alpha = alpha
         self.beta = beta
-        self.alphabet = string.ascii_uppercase  # 'abcdefghijklmnopqrstuvwxyz'
+        self.alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
+                         "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
+                         "W", "X", "Y", "Z"]
         self.cipher_list = []
         for idx in range(len(self.alphabet)):
             self.cipher_list.append((self.alpha * idx + self.beta) % 26)
 
     def encrypt(self, text):
-        pass
-        
+        """Encrypts a string (text) message"""
+
+        encrypted_list = []
+
+        for letter in text:
+            try: # characters in alphabet are encrypted 
+                letter_index = self.alphabet.index(letter)
+                encrypted_list.append(self.alphabet[self.cipher_list[letter_index]])
+            except ValueError: 
+                # characters outside of range (of alphabet) stay the same
+                encrypted_list.append(letter)
+     
+        return "".join(encrypted_list)
+
     def decrypt(self, text):
         pass
