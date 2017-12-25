@@ -65,16 +65,26 @@ def main():
         # what cipher is it? assign instance to cipher
         if cipher == "A":
             # ask for required parameters
-            alpha = int(input("Enter an alpha value. Available values:" \
-                              ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25"\
-                              "\n>>> "))
+            alpha = input("Enter an alpha value. Available values:" \
+                          ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25"\
+                          "\n>>> ")
+            while True:
+                try:
+                    alpha = int(alpha)
+                    break
+                except ValueError:
+                    clear()
+                    alpha = input("I do not think it is an integer. Try again."\
+                                  " Available values: 3, 5, 7, 9, 11, 15, 17,"\
+                                  " 19, 21, 23, 25\n>>> ")
+                    continue
+
             while True:
                 if alpha not in [3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]:
                     clear()
-                    print('Alpha value is not accepted. Please try again.\n')
-                    alpha = int(input("Enter an alpha value. Available values:" \
-                                      ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23,"\
-                                       " 25\n>>> "))
+                    print('Alpha value is not within the range. Please try again.\n')
+                    alpha = int(input("Available values: 3, 5, 7, 9, 11, 15, 17, 19"\
+                                      ", 21, 23, 25.\n>>> "))
                 clear()
                 break
             
@@ -88,7 +98,7 @@ def main():
                 except ValueError:
                     clear()
                     beta = input("Enter a beta value. Integers ONLY.\n>>> ")
-                    continue
+
             cipher_object = Affine(alpha, beta)
         elif cipher == "C":
             cipher_object = Caesar()
