@@ -93,23 +93,29 @@ def main():
         else:
             pass # TODO: fill in after working happy path
 
+        clear()
         encode_decode = input(
             "I see, That is a good choice."\
             "\nAre we encoding (E) or decoding (D) a message?\n>>> ")
         
+        clear()
         message = input(
             "Got it! I see what you are doing there.\n"\
             "What is the secret message?\n>>> ")
 
         # decrypt or encrypt the message
         en_de_message = run_cipher(cipher_object, message, encode_decode)
-        print(en_de_message)
-        break
-    # while True: # runs always until told to stop
-    #     encryption_runner()
-    #     run_again = input("Would you like to have another go?\n>>> ").lower()
-    #     if run_again != 'y':
-    #         break
+
+        # display secret message
+        clear()
+        print("This is your secret message\n{}.\nKeep it safe!\n [N/y]".format(en_de_message))
+        
+        # run again or quit        
+        run_again = input("Would you like to have another go?\n>>> ").lower()
+        if run_again != 'y':
+            clear()
+            print("Goodbye!")
+            break
 
 if __name__ == "__main__":
     main()
