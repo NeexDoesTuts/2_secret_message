@@ -61,17 +61,21 @@ def main():
         clear() # clear screen
         print(display_menu()) # display menu choices
         cipher = get_cipher_choice(CIPHER_CODE_LETTERS) # get correct cypher code
-
+        clear()
         # what cipher is it? assign instance to cipher
         if cipher == "A":
             # ask for required parameters
             alpha = int(input("Enter an alpha value. Available values:" \
-                          ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25\n"))
+                              ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25"\
+                              "\n>>> "))
             while True:
                 if alpha not in [3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]:
+                    clear()
                     print('Alpha value is not accepted. Please try again.\n')
                     alpha = int(input("Enter an alpha value. Available values:" \
-                                     ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25\n"))
+                                      ": 3, 5, 7, 9, 11, 15, 17, 19, 21, 23,"\
+                                       " 25\n>>> "))
+                clear()
                 break
             
             beta = input("Enter a beta value. Integers only.\n>>> ")
@@ -79,8 +83,10 @@ def main():
             while True:
                 try:
                     beta = int(beta)
+                    clear()
                     break
                 except ValueError:
+                    clear()
                     beta = input("Enter a beta value. Integers ONLY.\n>>> ")
                     continue
             cipher_object = Affine(alpha, beta)
@@ -108,10 +114,10 @@ def main():
 
         # display secret message
         clear()
-        print("This is your secret message\n{}.\nKeep it safe!\n [N/y]".format(en_de_message))
+        print("This is your secret message:\n{}\nKeep it safe!\n".format(en_de_message))
         
         # run again or quit        
-        run_again = input("Would you like to have another go?\n>>> ").lower()
+        run_again = input("Would you like to have another go? [N/y]\n>>> ").lower()
         if run_again != 'y':
             clear()
             print("Goodbye!")

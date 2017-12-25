@@ -24,8 +24,7 @@ class Affine(Cipher):
         """Encrypts a string (text) message"""
 
         encrypted_list = []
-        text = text.lower()
-
+        text = text.upper()
         for letter in text:
             try: # characters in alphabet are encrypted 
                 letter_idx = self.alphabet.index(letter)
