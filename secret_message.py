@@ -124,6 +124,7 @@ def main():
 
         # display secret message
         clear()
+        print("Your original message: \n{}\n".format(message.upper()))
         print("This is your secret message:\n{}\nKeep it safe!\n".format(en_de_message))
         
         # run again or quit        
