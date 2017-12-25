@@ -63,6 +63,7 @@ def main():
         cipher = get_cipher_choice(CIPHER_CODE_LETTERS) # get correct cypher code
         clear()
         # what cipher is it? assign instance to cipher
+
         if cipher == "A":
             # ask for required parameters
             alpha = input("Enter an alpha value. Available values:" \
@@ -112,8 +113,13 @@ def main():
         clear()
         encode_decode = input(
             "I see, That is a good choice."\
-            "\nAre we encoding (E) or decoding (D) a message?\n>>> ")
+            "\nAre we encoding (E) or decoding (D) a message?\n>>> ").upper()
         
+        while encode_decode not in ["E", "D"]:
+            clear()
+            encode_decode = input ("This is not a valid choice."\
+                                   "\nWe can encode (E) or decode (D)\n>>> ").upper()
+
         clear()
         message = input(
             "Got it! I see what you are doing there.\n"\
