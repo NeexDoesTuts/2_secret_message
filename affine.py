@@ -9,13 +9,16 @@ class Affine(Cipher):
         Creates an instance of the class using given values for alpha and beta.
         The cipher shift formula is: (alpha * letter_index + beta) % 26
         """
-        possible_alpha_values = [3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
+        possible_alpha_values = [i for i in range(3,26,2) if i != 13 ] 
+        # list comprehension to create:
+        # [3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
 
         self.alpha = alpha
         self.beta = beta
-        self.alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K",
-                         "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V",
-                         "W", "X", "Y", "Z"]
+        self.alphabet = [chr(i) for i in range(65, 91)] 
+        # list comprehension and character codes to generate (not broken)
+        # ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 
+        # 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         self.cipher_list = []
         for idx in range(len(self.alphabet)):
             self.cipher_list.append((self.alpha * idx + self.beta) % 26)
