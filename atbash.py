@@ -1,3 +1,5 @@
+from ciphers import Cipher
+
 class Atbash(Cipher):
     """Encrypts or decrypts text using the Atbash cipher method."""
 
@@ -30,12 +32,12 @@ class Atbash(Cipher):
         """Decrypts a string (text) message"""
         
         decrypted_list = []
-        text = text.lower()
+        text = text.upper()
         
         for letter in text:
             try:
-                letter_idx = self.cipher_list(letter)
-                decrypted_l = self.alphabet.index(letter_idx)
+                letter_idx = self.cipher_list.index(letter)
+                decrypted_l = self.alphabet[letter_idx]
                 decrypted_list.append(decrypted_l)
             except ValueError:
                 decrypted_list.append(letter)

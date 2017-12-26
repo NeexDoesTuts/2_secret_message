@@ -43,7 +43,7 @@ class Affine(Cipher):
         """Decrypts a string (text) message"""
         
         decrypted_list = []
-        text = text.lower()
+        text = text.upper()
         
         for letter in text:
             try:

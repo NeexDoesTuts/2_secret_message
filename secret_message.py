@@ -2,6 +2,7 @@ import os
 
 from affine import Affine
 from caesar import Caesar
+from atbash import Atbash
 
 def clear():
     """Clears console."""
@@ -50,6 +51,7 @@ def main():
     # available ciphers and their corresponding code names
     CIPHER_CODE_NAMES = {
         "A" : "Affine",
+        "AT" : "Atbash",
         "C" : "Ceasar"
     }
     CIPHER_CODE_LETTERS = []
@@ -101,6 +103,8 @@ def main():
                     beta = input("Enter a beta value. Integers ONLY.\n>>> ")
 
             cipher_object = Affine(alpha, beta)
+        elif cipher == "AT":
+            cipher_object = Atbash()
         elif cipher == "C":
             cipher_object = Caesar()
         elif cipher == "":
