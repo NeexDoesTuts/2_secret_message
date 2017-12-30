@@ -9,15 +9,15 @@ class Affine(Cipher):
         Creates an instance of the class using given values for alpha and beta.
         The cipher shift formula is: (alpha * letter_index + beta) % 26
         """
-        possible_alpha_values = [i for i in range(3,26,2) if i != 13 ] 
+        possible_alpha_values = [i for i in range(3, 26, 2) if i != 13]
         # list comprehension to create:
         # [3, 5, 7, 9, 11, 15, 17, 19, 21, 23, 25]
 
         self.alpha = alpha
         self.beta = beta
-        self.alphabet = [chr(i) for i in range(65, 91)] 
+        self.alphabet = [chr(i) for i in range(65, 91)]
         # list comprehension and character codes to generate (not broken)
-        # ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 
+        # ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
         # 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
         self.cipher_list = []
         for idx in range(len(self.alphabet)):
@@ -29,22 +29,22 @@ class Affine(Cipher):
         encrypted_list = []
         text = text.upper()
         for letter in text:
-            try: # characters in alphabet are encrypted 
+            try:  # characters in alphabet are encrypted
                 letter_idx = self.alphabet.index(letter)
                 encrypted_l = self.alphabet[self.cipher_list[letter_idx]]
                 encrypted_list.append(encrypted_l)
-            except ValueError: 
+            except ValueError:
                 # characters outside of range (of alphabet) stay the same
                 encrypted_list.append(letter)
-     
+
         return "".join(encrypted_list)
 
     def decrypt(self, text):
         """Decrypts a string (text) message"""
-        
+
         decrypted_list = []
         text = text.upper()
-        
+
         for letter in text:
             try:
                 letter_idx = self.alphabet.index(letter)
@@ -52,5 +52,5 @@ class Affine(Cipher):
                 decrypted_list.append(decrypted_l)
             except ValueError:
                 decrypted_list.append(letter)
-        
+
         return "".join(decrypted_list)
