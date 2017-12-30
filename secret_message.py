@@ -8,23 +8,30 @@ def clear():
     """Clears console."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def display_menu():
+def display_menu(cypher_dict):
     """Displays manu of ciphers available for encoding messages"""
 
+    # create message from given Cyphers
     menu = "Welcome! If you have a secret you are in a good place."\
             "\nHere is a set of great tools to keep you message"\
-            " from unwanted attention:"\
-            "\n1. Affine (A)"\
-            "\n2. Caesar (C)"\
-            "\n3. -"\
-            "\n4. -"
+            " from unwanted attention:"
+
+    idx = 1
+    for key, value in cypher_dict.items():
+        menu += "\n{}. {} - ({})".format(idx, value, key)
+        idx += 1
     return menu
 
-def get_cipher_choice(cipher_code_letters):
+def get_cipher_choice(cipher_dict):
     """Asks for user's cipher choice against the available ciphers given
     as a list of code letters
     """
-    
+    # create codes on the fly
+    cipher_code_letters = []
+
+    for key in cipher_dict:
+        cipher_code_letters.append(key)
+
     cipher_choice = ""
 
     while cipher_choice.upper() not in cipher_code_letters:
@@ -34,7 +41,7 @@ def get_cipher_choice(cipher_code_letters):
             return cipher_choice
         # TODO: add a Q for quitting the entire program with sys module
         print("Errrr, something went wrong.") # else, try again
-        display_menu()
+        display_menu(cipher_dict)
 
 def run_cipher(cipher_object, message, encode_decode):
     """Runs encryption according to chosen cipher"""
@@ -54,15 +61,11 @@ def main():
         "AT" : "Atbash",
         "C" : "Ceasar"
     }
-    CIPHER_CODE_LETTERS = []
-    # names are created on the fly, from the given dictionary
-    for key in CIPHER_CODE_NAMES:
-        CIPHER_CODE_LETTERS.append(key)
 
     while True:
         clear() # clear screen
-        print(display_menu()) # display menu choices
-        cipher = get_cipher_choice(CIPHER_CODE_LETTERS) # get correct cypher code
+        print(display_menu(CIPHER_CODE_NAMES)) # display menu choices
+        cipher = get_cipher_choice(CIPHER_CODE_NAMES) # get correct cypher code
         clear()
         # what cipher is it? assign instance to cipher
 
