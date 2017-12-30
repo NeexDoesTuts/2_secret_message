@@ -3,6 +3,7 @@ import os
 from affine import Affine
 from caesar import Caesar
 from atbash import Atbash
+from keycipher import Keyword
 
 def clear():
     """Clears console."""
@@ -59,7 +60,8 @@ def main():
     CIPHER_CODE_NAMES = {
         "A" : "Affine",
         "AT" : "Atbash",
-        "C" : "Ceasar"
+        "C" : "Ceasar",
+        "K" : "Keyword"
     }
 
     while True:
@@ -110,12 +112,16 @@ def main():
             cipher_object = Atbash()
         elif cipher == "C":
             cipher_object = Caesar()
-        elif cipher == "":
-            pass
-        elif cipher == "":
-            pass
-        else:
-            pass # TODO: fill in after working happy path
+        elif cipher == "K":
+            # ask for the keyword
+            key = input("What keyword word would you like to use to en(de)crypt your message?\n>>> ")
+            while True:
+                if len(key) > 1: # the key cannot be 0, as this will change nothing, it can be non alphabet characters
+                    break
+                else:
+                    clear()    
+                    key = input("You need at least one character, although the more the better.\n>>>")
+            cipher_object = Keyword(key)
 
         clear()
         encode_decode = input(
